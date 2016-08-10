@@ -1,0 +1,34 @@
+#%RAML 0.8
+---
+title: BeerCoders API
+baseUri: http://api.beercoders.pl
+version: v1
+
+schemas:
+ - article: !include schemas/article.schema
+
+resourceTypes:
+  - readOnlyCollection: !include resourceTypes/readOnlyCollection.raml
+  - collection: !include resourceTypes/collection.raml
+  - collection-item: !include resourceTypes/collection-item.raml
+
+traits:
+  - orderable: !include traits/orderable.raml
+  - pageable: !include traits/pageable.raml
+  - searchable: !include traits/searchable.raml
+
+/articles:
+  type:
+    collection:
+      exampleCollection: !include examples/articles.sample
+      exampleItem: !include examples/article-new.sample
+  get:
+    is: [
+          searchable: {description: "with valid searchable fields: title", example: "[\"title\", \"Get L\", \"like\"]"},
+          orderable: {fieldsList: "title"},
+          pageable
+        ]
+  /{id}:
+    type:
+      collection-item:
+        exampleItem: !include examples/article-retrieve.sample
