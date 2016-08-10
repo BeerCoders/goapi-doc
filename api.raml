@@ -4,6 +4,7 @@ title: BeerCoders API
 baseUri: http://api.beercoders.pl
 mediaType: application/json
 version: v1
+securedBy: [oauth_2_0]
 protocols:
   - HTTP
   - HTTPS
@@ -11,14 +12,17 @@ protocols:
 schemas:
  - article: !include schemas/article.schema
 
+securitySchemes:
+  - oauth_2_0: !include securitySchemes/oauth2.yml
+
 resourceTypes:
-  - collection: !include resourceTypes/collection.raml
-  - collection-item: !include resourceTypes/collection-item.raml
+  - collection: !include resourceTypes/collection.yml
+  - collection-item: !include resourceTypes/collection-item.yml
 
 traits:
-  - orderable: !include traits/orderable.raml
-  - pageable: !include traits/pageable.raml
-  - searchable: !include traits/searchable.raml
+  - orderable: !include traits/orderable.yml
+  - pageable: !include traits/pageable.yml
+  - searchable: !include traits/searchable.yml
 
 /articles:
   type:
