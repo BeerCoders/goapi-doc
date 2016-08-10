@@ -1,29 +1,22 @@
-description: Collection of available <<resourcePathName>> in BeerCoders API.
+description: Collection of available <<resourcePathName>>.
 get:
   description: Get a list of <<resourcePathName>>.
   responses:
     200:
       body:
-        application/json:
-          example: |
-            <<exampleCollection>>
+        example: |
+          <<exampleCollection>>
 post:
-  description: |
-    Add a new <<resourcePathName|!singularize>> to BeerCoders API.
-  queryParameters:
-    access_token:
-      description: "The access token provided by the authentication application"
-      example: AABBCCDD
-      required: true
-      type: string
+  description: Create/add a new <<resourcePathName|!singularize>>.
   body:
-    application/json:
-      schema: <<resourcePathName|!singularize>>
-      example: |
-        <<exampleItem>>
+    schema: <<resourcePathName|!singularize>>
+    example: |
+      <<exampleBody>>
   responses:
-    200:
+    201:
+      headers:
+        Location:
       body:
-        application/json:
-          example: |
-            { "message": "The <<resourcePathName|!singularize>> has been properly entered" }
+        schema: <<resourcePathName|!singularize>>
+        example: |
+          <<exampleItem>>

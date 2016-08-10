@@ -2,13 +2,16 @@
 ---
 title: BeerCoders API
 baseUri: http://api.beercoders.pl
+mediaType: application/json
 version: v1
+protocols:
+  - HTTP
+  - HTTPS
 
 schemas:
  - article: !include schemas/article.schema
 
 resourceTypes:
-  - readOnlyCollection: !include resourceTypes/readOnlyCollection.raml
   - collection: !include resourceTypes/collection.raml
   - collection-item: !include resourceTypes/collection-item.raml
 
@@ -21,7 +24,8 @@ traits:
   type:
     collection:
       exampleCollection: !include examples/articles.sample
-      exampleItem: !include examples/article-new.sample
+      exampleItem: !include examples/article.sample
+      exampleBody: !include examples/article-new.sample
   get:
     is: [
           searchable: {description: "with valid searchable fields: title", example: "[\"title\", \"Get L\", \"like\"]"},
@@ -31,4 +35,5 @@ traits:
   /{id}:
     type:
       collection-item:
-        exampleItem: !include examples/article-retrieve.sample
+        exampleItem: !include examples/article.sample
+        exampleBody: !include examples/article-new.sample
