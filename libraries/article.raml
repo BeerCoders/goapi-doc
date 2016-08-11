@@ -1,0 +1,11 @@
+#%RAML 1.0 Library
+types:
+  Article:
+    type: object
+    properties:
+      title: string
+  Articles:
+    type: array
+    items: Article
+    minItems: 1
+    uniqueItems: true

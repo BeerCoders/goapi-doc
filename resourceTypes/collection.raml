@@ -1,22 +1,21 @@
+#%RAML 1.0 ResourceType
 description: Collection of available <<resourcePathName>>.
 get:
   description: Get a list of <<resourcePathName>>.
   responses:
     200:
       body:
-        example: |
-          <<exampleCollection>>
+        type: <<typeCollection>>
+        example: <<exampleCollection>>
 post:
   description: Create/add a new <<resourcePathName|!singularize>>.
   body:
-    schema: <<resourcePathName|!singularize>>
-    example: |
-      <<exampleBody>>
+    type: <<typeItem>>
+    example: <<exampleItem>>
   responses:
     201:
       headers:
         Location:
       body:
-        schema: <<resourcePathName|!singularize>>
-        example: |
-          <<exampleItem>>
+        type: <<typeItem>>
+        example: <<exampleItem>>
