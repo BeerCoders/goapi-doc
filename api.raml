@@ -1,43 +1,39 @@
-#%RAML 0.8
+#%RAML 1.0
 ---
 title: BeerCoders API
 baseUri: http://api.beercoders.pl
 mediaType: application/json
 version: v1
-securedBy: [oauth_2_0]
-protocols:
-  - HTTP
-  - HTTPS
-
-schemas:
- - article: !include schemas/article.schema
+protocols: [ HTTP, HTTPS ]
+securedBy: [ oauth_2_0 ]
 
 securitySchemes:
-  - oauth_2_0: !include securitySchemes/oauth2.yml
+  oauth_2_0: !include securitySchemes/oauth2.raml
 
-resourceTypes:
-  - collection: !include resourceTypes/collection.yml
-  - collection-item: !include resourceTypes/collection-item.yml
+documentation:
+ - title: Legal
+   content: !include documentation/legal.markdown
 
-traits:
-  - orderable: !include traits/orderable.yml
-  - pageable: !include traits/pageable.yml
-  - searchable: !include traits/searchable.yml
+uses:
+ article: libraries/article.raml
 
-/articles:
-  type:
-    collection:
-      exampleCollection: !include examples/articles.sample
-      exampleItem: !include examples/article.sample
-      exampleBody: !include examples/article-new.sample
-  get:
-    is: [
-          searchable: {description: "with valid searchable fields: title", example: "[\"title\", \"Get L\", \"like\"]"},
-          orderable: {fieldsList: "title"},
-          pageable
-        ]
-  /{id}:
-    type:
-      collection-item:
-        exampleItem: !include examples/article.sample
-        exampleBody: !include examples/article-new.sample
+ /articles:
+   type:
+     collection:
+       exampleCollection: !include examples/articles.json
+       exampleItem: !include examples/article.json
+       typeItem: article.Article
+       typeCollection: article.Articles
+   get:
+     is: [
+           searchable: {description: "with valid searchable fields: title", example: "[\"title\", \"Get L\", \"like\"]"},
+           orderable: {fieldsList: "title"},
+           pageable
+         ]
+   /{id}:
+     type:
+       collection-item:
+         exampleCollection: !include examples/articles.json
+         exampleItem: !include examples/article.json
+         typeItem: article.Article
+         typeCollection: article.Articles

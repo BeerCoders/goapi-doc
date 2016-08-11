@@ -1,0 +1,29 @@
+#%RAML 1.0 ResourceType
+description: Entity representing a <<resourcePathName|!singularize>>
+get:
+  description: Get a specific <<resourcePathName|!singularize>>
+  responses:
+    200:
+      body:
+        type: <<typeItem>>
+        example: <<exampleItem>>
+    404:
+      body:
+        example: !include ./../examples/NotFoundError.json
+patch:
+  description: Update a specific <<resourcePathName|!singularize>>
+  body:
+    type: <<typeItem>>
+    example: <<exampleItem>>
+  responses:
+    200:
+      body:
+        type: <<typeItem>>
+        example: <<exampleItem>>
+    404:
+      body:
+        example: !include ./../examples/NotFoundError.json
+delete:
+  description: Remove/cancel the specyfic <<resourcePathName|!singularize>>
+  responses:
+    204:
